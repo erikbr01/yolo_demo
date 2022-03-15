@@ -3,6 +3,7 @@ import pandas as pd
 
 class Logger:
     def __init__(self) -> None:
+        # TODO: add confidence
         # Store (x,y,z,t) in here
         self.records = np.empty((0,4))
 
