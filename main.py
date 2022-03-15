@@ -7,7 +7,7 @@ from logger import Logger
 NAMEFILE = "coco.names"
 LOGFILE = "records_bottle_1.csv"
 
-net = cv2.dnn.readNet("yolov4-leaky-416.weights", "yolov4-leaky-416.cfg")
+net = cv2.dnn.readNet("nets/yolov4-leaky-416.weights", "nets/yolov4-leaky-416.cfg")
 classes = []
 with open(NAMEFILE, "r") as f:
     classes = [line.strip() for line in f.readlines()]
