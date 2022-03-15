@@ -139,6 +139,6 @@ class YoloDetector:
         output.release()
         cv2.destroyAllWindows()
 
-
-det = YoloDetector('nets/yolov4-leaky-416.weights', 'nets/yolov4-leaky-416.cfg')
-det.detect_objects()
+if __name__=='__main__':
+    det = YoloDetector('nets/yolov4-leaky-416.weights', 'nets/yolov4-leaky-416.cfg')
+    det.detect_objects()
