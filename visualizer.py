@@ -2,30 +2,30 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-class Visualizer:
+class DataAnalyzer:
     def __init__(self, input_location):
         self.df = pd.read_csv(input_location)
+        self.avg_fps = 0
+        self.avg_position = (0,0)
 
     def export_to_csv(self, output_location):
         self.df.to_csv(output_location)
 
     def add_fps_to_df(self):
         timestamps = self.df['t'].to_numpy()
-        fps = [0,]
+        fps = [0]
 
         for i in range(1, len(timestamps)):
             fps.append(1/(timestamps[i] - timestamps[i-1])/1000)
 
         self.df.insert(len(self.df.columns), 'fps', fps)
         
-    def visualize_fps(self):
+    def visualize_fps_raw(self):
         if 'fps' not in self.df.columns:
             self.add_fps_to_df()
             
         fps = self.df['fps'].to_numpy()
-        print(fps.size)
         timesteps = np.linspace(0, fps.size - 1, fps.size)
-        print(len(timesteps))
         fig = plt.figure()
         ax = fig.add_subplot()
         plt.scatter(timesteps, fps, c='blue')
@@ -78,6 +78,8 @@ class Visualizer:
 
 
 if __name__=='__main__':
-    vis = Visualizer('records_bottle.csv')
+    vis = DataAnalyzer('logs/records_bottle_0.csv')
     vis.add_fps_to_df()
-    vis.visualize_fps()
+    #vis.visualize_fps_raw()
+    vis.visualize2D()
+    

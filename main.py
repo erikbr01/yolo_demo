@@ -4,8 +4,18 @@ import numpy as np
 import time
 from logger import Logger
 
+
+
+# Determine the record counter
+text = open('counter.txt', 'r+')
+RECORD_COUNTER = int(text.readline())
+text.truncate(0)
+text.write(str(RECORD_COUNTER + 1))
+
 NAMEFILE = "coco.names"
-LOGFILE = "records_bottle_1.csv"
+OBJECT_LOG_NAME = 'bottle'
+LOGFILE = f"logs/records_{OBJECT_LOG_NAME}_{RECORD_COUNTER}.csv"
+
 
 net = cv2.dnn.readNet("nets/yolov4-leaky-416.weights", "nets/yolov4-leaky-416.cfg")
 classes = []
@@ -64,7 +74,7 @@ while (True):
                 elapsed_time = time.time() - starting_time
                 fps = frame_id / elapsed_time
 
-                if str(classes[class_id]) == 'bottle':
+                if str(classes[class_id]) == OBJECT_LOG_NAME:
                     record = np.array([center_x, center_y, 0, elapsed_time])
                     records = np.concatenate((records, [record,]))
 
