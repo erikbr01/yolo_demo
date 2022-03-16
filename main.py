@@ -18,6 +18,9 @@ class YoloDetector:
         # self.net = cv2.dnn.readNet("nets/yolov4-leaky-416.weights", "nets/yolov4-leaky-416.cfg")
         self.net = cv2.dnn.readNet(weight_file, cfg_file)
 
+        self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+        self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+
         # Read class names from COCO dataset
         self.classes = []
         with open(self.NAMEFILE, "r") as f:

@@ -1,5 +1,6 @@
 /nets
 /logs
+/videos
 *.csv
 *.pyc
 *.avi
